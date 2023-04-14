@@ -1,25 +1,43 @@
-import logo from './logo.svg';
-import './App.css';
+import "./App.css";
+import React from "react";
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+class App extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      email: "",
+      phone: "",
+      hovered: 0,
+      submit: 0,
+    };
+  }
+
+  onSubmit = (e) => {
+    e.preventDefault();
+    alert("Submitted data. Email" + this.state.email);
+    this.setState({
+      submit: this.state.submit + 1,
+      email: "",
+      phone: "",
+    });
+  };
+
+  onHover = (e) => {
+    this.setState({
+      hovered: this.state.hovered + 1,
+    });
+  };
+
+  render() {
+    return (
+      <form onSubmit={this.onSubmit} onMouseEnter={this.onHover}>
+        <label>Email</label>
+        <input type="text" name="email" value={this.state.email} />
+        <label>Phone</label>
+        <input type="text" name="phone" value={this.state.phone} />
+      </form>
+    );
+  }
 }
 
 export default App;
